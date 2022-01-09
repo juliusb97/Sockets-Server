@@ -8,6 +8,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+app.use(express.static("public"));
+
 app.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
 	next();
@@ -39,14 +41,14 @@ app.get("/", function(req, res){
 	res.sendFile(file, { root: __dirname });
 });
 
-app.get("/:file", function(req, res) {
+// app.get("/:file", function(req, res) {
 	
-	let file = "index.html"
-	if(req.params.file)
-		file = req.params.file;
+// 	let file = "index.html"
+// 	if(req.params.file)
+// 		file = req.params.file;
 	
-	console.log(file);
-	res.sendFile(file, { root: __dirname });
-})
+// 	console.log(file);
+// 	res.sendFile(file, { root: __dirname });
+// })
 
 app.listen(4269);
