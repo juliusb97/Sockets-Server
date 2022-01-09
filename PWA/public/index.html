@@ -92,13 +92,13 @@
                 font-weight: 600;
             }
         </style>
-    </head>
-    <body>
         <script>
             if("serviceWorker" in navigator) {
-                navigator.serviceWorker.register("sw.js");
+                navigator.serviceWorker.register("./sw.js");
             }
         </script>
+    </head>
+    <body>
         <div id="main">
             <div id="heading">
                 <h1>Socket Control</h1>
