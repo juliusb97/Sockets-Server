@@ -2,12 +2,12 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const { exec } = require("child_process");
-const fs = require("fs");
-const https = require("https");
+// const fs = require("fs");
+// const https = require("https");
 const execSync = require("child_process").execSync;
 
-const key = fs.readFileSync("./key.pem");
-const cert = fs.readFileSync("./cert.pem");
+// const key = fs.readFileSync("./key.pem");
+// const cert = fs.readFileSync("./cert.pem");
 
 const app = express();
 app.use(bodyParser.json());
@@ -56,8 +56,8 @@ app.get("/", function(req, res){
 // 	res.sendFile(file, { root: __dirname });
 // })
 
-// app.listen(4269);
+app.listen(4269);
 
-const server = https.createServer({key: key, cert: cert}, app);
+// const server = https.createServer({key: key, cert: cert}, app);
 
-server.listen(4269);
+// server.listen(4269);
