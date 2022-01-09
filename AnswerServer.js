@@ -20,9 +20,9 @@ http.createServer(function (req, res) {
   
   if(query["action"] == "turnon"){
 	res.end("An");
-	exec("/home/pi/wiringPi/433Utils/SocketControl -on", (i,j,k)=>{return;});
+	exec("/home/pi/SocketControl -on", (i,j,k)=>{return;});
   } else if(query["action"] == "turnoff"){
-	exec("/home/pi/wiringPi/433Utils/SocketControl -off", (i,j,k)=>{return;});
+	exec("/home/pi/SocketControl -off", (i,j,k)=>{return;});
   	res.end("Aus");
   } else if(query["action"]=="on"){
 	let socketNo = -1;
@@ -31,7 +31,7 @@ http.createServer(function (req, res) {
 	} catch(e){
 		res.end(e);
 	}
-	exec("/home/pi/wiringPi/433Utils/SocketControl " + parseInt(query["no"]) + " 1", (i,j,k)=>{return;});
+	exec("/home/pi/SocketControl " + parseInt(query["no"]) + " 1", (i,j,k)=>{return;});
 	res.end("Turned on socket no " + socketNo);
   } else if(query["action"]=="off"){
 	let socketNo = -1;
@@ -40,7 +40,7 @@ http.createServer(function (req, res) {
 	} catch(e){
 		res.end(e);
 	}
-	exec("/home/pi/wiringPi/433Utils/SocketControl " + parseInt(query["no"]) + " 0", (i,j,k)=>{return;});
+	exec("/home/pi/SocketControl " + parseInt(query["no"]) + " 0", (i,j,k)=>{return;});
 	res.end("Turned on socket off " + socketNo);
   } else if(query["action"]== "check_temp"){
   	var cpuTemp = execSync("/opt/vc/bin/vcgencmd measure_temp");
