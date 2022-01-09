@@ -43,7 +43,7 @@ http.createServer(function (req, res) {
 	exec("/home/pi/SocketControl " + parseInt(query["no"]) + " 0", (i,j,k)=>{return;});
 	res.end("Turned on socket off " + socketNo);
   } else if(query["action"]== "check_temp"){
-  	var cpuTemp = execSync("/opt/vc/bin/vcgencmd measure_temp");
+  	var cpuTemp = execSync("vcgencmd measure_temp");
 	cpuTemp = cpuTemp.toString();
 	cpuTemp = cpuTemp.slice(5);
 	cpuTemp = cpuTemp.replace(".", ",");
