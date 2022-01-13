@@ -1,0 +1,16 @@
+{
+  "name": "sockets-server",
+  "version": "1.0.0",
+  "description": "Server for turning my 433 Mhz sockets on or off",
+  "main": "AnswerServer.js",
+  "scripts": {
+    "build": "npm i",
+    "start": "node AnswerServer.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://raspberrypi:3000/pi/Sockets-Server.git"
+  },
+  "author": "Julius Banke",
+  "license": "ISC"
+}
