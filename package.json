@@ -5,7 +5,8 @@
   "main": "AnswerServer.js",
   "scripts": {
     "build": "npm i",
-    "start": "node AnswerServer.js"
+    "start": "node AnswerServer.js",
+    "cwd": "node Cwd.js"
   },
   "repository": {
     "type": "git",
