@@ -13,5 +13,8 @@
     "url": "http://raspberrypi:3000/pi/Sockets-Server.git"
   },
   "author": "Julius Banke",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
 }
