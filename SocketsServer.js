@@ -9,7 +9,7 @@ const app = express();
 app.get("/", (req, res) => {
 
 	res.write("Socket-Server\r\n");
-	res.write("usage: /:socketNo?action=[1|0]");
+	res.write("usage: /:socketNo?action=[1|0]\r\n");
 
 	res.status(200).end();
 
@@ -22,7 +22,7 @@ app.get("/:socketNo", (req, res) => {
 
 	exec(`/home/pi/SocketControl ${req.params.socketNo} ${req.query.action}`, (i,j,k)=>{return;});
 
-	res.status(200).send(`Turned socket ${req.params.socketNo} ${req.query.action == "1" ? "on" : "off"}`);
+	res.status(200).send(`Turned socket ${req.params.socketNo} ${req.query.action == "1" ? "on" : "off"}\r\n`);
 
 });
 
