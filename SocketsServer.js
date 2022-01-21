@@ -11,7 +11,7 @@ app.get("/", (req, res) => {
 	res.write("Socket-Server\r\n");
 	res.write("usage: /:socketNo?action=[1|0]\r\n");
 
-	res.status(200).end();
+	res.status(200).send();
 
 });
 
