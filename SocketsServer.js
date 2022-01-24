@@ -1,7 +1,32 @@
 const express = require("express");
 const { exec } = require('child_process');
+const { env } = require("process");
+
+const PORT = 6800 || env.PORT;
 
 const app = express();
+
+function log(msg, type) {
+	
+	const output = `[${new Date().toISOString()}] ${msg}`;
+	
+	if(type == "error")
+		console.error(output);
+	else if(type == "warn")
+		console.warn(output);
+	else console.log(output);
+}
+
+log(`Started ${process.argv[1]} at port ${PORT}`);
+
+/**
+ * Log
+ */
+app.use((req, res, next) => {
+	log(`Received request from ${req.ip} for url ${req.url}`);
+	next();
+});
+
 
 /**
  * Root-Route, only provides info
@@ -34,4 +59,4 @@ app.get("/:socketNo", (req, res) => {
 
 });
 
-app.listen(6969);
+app.listen(PORT);
