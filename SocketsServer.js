@@ -1,8 +1,9 @@
 const express = require("express");
+const fs = require("fs");
 const { exec } = require('child_process');
 const { env } = require("process");
-
-const PORT = 6800 || env.PORT;
+const https = require("https");
+const path = require("path");
 
 const app = express();
 
@@ -17,6 +18,33 @@ function log(msg, type) {
 	else console.log(output);
 }
 
+let config;
+let useHttps = false;
+const credentials = { key: null, cert: null, passphrase: null };
+
+/**
+ * Read config
+ */
+try {
+	config = JSON.parse(fs.readFileSync(path.join(__dirname, `/config/config.json`)));
+
+	if(Object.prototype.hasOwnProperty.call(config, "key")) {
+		useHttps = true;
+
+		credentials.key = fs.readFileSync(path.join(__dirname, config.key));
+		credentials.cert = fs.readFileSync(path.join(__dirname, config.cert));
+		credentials.passphrase = config.passphrase;
+	}
+
+} catch(e) {
+	log("Could not read config.json. Exiting.");
+	process.exit(1);
+}
+
+const PORT = 6800 || config.port || env.PORT;
+const HTTPSPORT = 6443 || config.httpsPort || env.PORT;
+
+
 log(`Started ${process.argv[1]} at port ${PORT}`);
 
 /**
@@ -27,13 +55,19 @@ app.use((req, res, next) => {
 	next();
 });
 
+/**
+ * CORS handling
+ */
+app.use((req, res, next) => {
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
+});
 
 /**
  * Root-Route, only provides info
  */
 app.get("/", (req, res) => {
-
-	res.setHeader("Access-Control-Allow-Origin", "*");
 
 	res.write("Socket-Server\r\n");
 	res.write("usage: /:socketNo?action=[1|0]\r\n");
@@ -47,8 +81,6 @@ app.get("/", (req, res) => {
  */
 app.get("/:socketNo", (req, res) => {
 
-	res.setHeader("Access-Control-Allow-Origin", "*");
-
 	//Basic injection prevention
 	if(parseInt(req.params.socketNo) == NaN || parseInt(req.query.action) == NaN)
 		return;
@@ -59,4 +91,16 @@ app.get("/:socketNo", (req, res) => {
 
 });
 
+/**
+ * HTTP Server
+ */
 app.listen(PORT);
+
+
+/**
+ * HTTPS Server
+ */
+if(useHttps) {
+	const httpsServer = https.createServer(config.credentials, app);
+	httpsServer.listen(HTTPSPORT);
+}
