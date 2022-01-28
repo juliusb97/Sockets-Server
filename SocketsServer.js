@@ -37,11 +37,11 @@ try {
 
 		log(`Set up HTTPS configuration, server listening on ${HTTPSPORT}`);
 	} else {
-		log("HTTPS configuration not set correctly, not using HTTPS", warn);
+		log("HTTPS configuration not set correctly, not using HTTPS", "warn");
 	}
 
 } catch(e) {
-	log("Could not read config.json. Exiting.", error);
+	log("Could not read config.json. Exiting.", "error");
 	process.exit(1);
 }
 
