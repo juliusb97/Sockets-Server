@@ -108,6 +108,6 @@ httpServer.listen(PORT);
  * HTTPS Server
  */
 if(useHttps) {
-	const httpsServer = https.createServer(config.credentials, app);
+	const httpsServer = https.createServer(credentials, app);
 	httpsServer.listen(HTTPSPORT);
 }
