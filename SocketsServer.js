@@ -32,8 +32,8 @@ try {
 	if(Object.prototype.hasOwnProperty.call(config, "key")) {
 		useHttps = true;
 
-		credentials.key = fs.readFileSync(path.join(__dirname, config.key));
-		credentials.cert = fs.readFileSync(path.join(__dirname, config.cert));
+		credentials.key = fs.readFileSync(path.join(__dirname, config.key), "utf-8");
+		credentials.cert = fs.readFileSync(path.join(__dirname, config.cert), "utf-8");
 		credentials.passphrase = config.passphrase;
 
 		log(`Set up HTTPS configuration, server listening on ${config.httpsPort}`);
