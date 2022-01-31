@@ -99,7 +99,8 @@ app.get("/:socketNo", (req, res) => {
 /**
  * HTTP Server
  */
-app.listen(PORT);
+const httpServer = http.createServer(app);
+httpServer.listen(PORT);
 
 
 /**
