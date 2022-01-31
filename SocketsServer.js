@@ -42,6 +42,7 @@ try {
 
 } catch(e) {
 	log("Could not read config.json. Exiting.", "error");
+	log(`Error given: ${e}`);
 	process.exit(1);
 }
 
