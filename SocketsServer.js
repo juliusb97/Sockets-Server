@@ -35,7 +35,7 @@ try {
 		credentials.cert = fs.readFileSync(path.join(__dirname, config.cert));
 		credentials.passphrase = config.passphrase;
 
-		log(`Set up HTTPS configuration, server listening on ${HTTPSPORT}`);
+		log(`Set up HTTPS configuration, server listening on ${config.httpsPort}`);
 	} else {
 		log("HTTPS configuration not set correctly, not using HTTPS", "warn");
 	}
